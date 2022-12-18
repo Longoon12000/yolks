@@ -42,7 +42,7 @@ RUN         cd /tmp/ \
             && mv rcon-0.10.2-amd64_linux/rcon /usr/local/bin/
 			
 ## symlink the correct libc++ for pavlov beta
-RUN         rm /usr/lib/x86_64-linux-gnu/libc++.so
+RUN         rm /usr/lib/x86_64-linux-gnu/libc++.so \
             && ln -s /usr/lib/x86_64-linux-gnu/libc++.so.1 /usr/lib/x86_64-linux-gnu/libc++.so
 
 USER        container
