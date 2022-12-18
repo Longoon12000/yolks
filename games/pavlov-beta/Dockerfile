@@ -22,7 +22,7 @@
 
 FROM        --platform=$TARGETOS/$TARGETARCH debian:stable-slim
 
-LABEL       author="Matthew Penner" maintainer="matthew@pterodactyl.io"
+LABEL       author="Rain" maintainer="rain@codefreak.net"
 
 LABEL       org.opencontainers.image.source="https://github.com/pterodactyl/yolks"
 LABEL       org.opencontainers.image.licenses=MIT
@@ -40,6 +40,10 @@ RUN         cd /tmp/ \
             && curl -sSL https://github.com/gorcon/rcon-cli/releases/download/v0.10.2/rcon-0.10.2-amd64_linux.tar.gz > rcon.tar.gz \
             && tar xvf rcon.tar.gz \
             && mv rcon-0.10.2-amd64_linux/rcon /usr/local/bin/
+			
+## symlink the correct libc++ for pavlov beta
+RUN         rm /usr/lib/x86_64-linux-gnu/libc++.so
+            && ln -s /usr/lib/x86_64-linux-gnu/libc++.so.1 /usr/lib/x86_64-linux-gnu/libc++.so
 
 USER        container
 ENV         USER=container HOME=/home/container
